@@ -2,33 +2,49 @@
 
 ## Overview
 
-This project includes the creation of a PostgreSQL database for task management and the development of a Python script to populate the database with fake data using the Faker library. Additionally, SQL queries are executed to manipulate and retrieve data according to various business requirements.
+This project demonstrates interaction with two types of databases: a PostgreSQL database for task management and MongoDB for storing information about cats. It includes a Python script to populate the PostgreSQL database with fake data and perform various SQL queries. Another Python script uses PyMongo to perform CRUD operations with MongoDB.
 
-## Database Setup
+## PostgreSQL Database Setup
 
-The PostgreSQL database is structured with three main tables:
+The PostgreSQL database contains three main tables:
 
-- `users`: contains user information with fields for id, full name, and email.
-- `status`: stores different statuses of tasks with fields for id and status name.
-- `tasks`: holds tasks associated with users and their statuses, with fields for id, title, description, status_id, and user_id.
+- `users`: User information with fields for ID, full name, and email.
+- `status`: Different statuses of tasks with fields for ID and status name.
+- `tasks`: Tasks associated with users and their statuses.
 
-Relations are established between tables to ensure referential integrity, with cascading delete set up for tasks related to users.
+Referential integrity is enforced with cascading delete operations for tasks related to users.
 
-## Python Script
+## MongoDB Database Setup
 
-A Python script named `seed.py` is utilized to connect to the PostgreSQL database and insert fake data into the tables. The script utilizes the `psycopg2` library to interact with the database and the `Faker` library to generate random user and task data.
+A MongoDB database stores documents in a collection named `cats`, with each document structured to include:
+
+- `_id`: ObjectId of the document.
+- `name`: Name of the cat.
+- `age`: Age of the cat.
+- `features`: An array of features or characteristics of the cat.
+
+## Python Scripts
+
+### PostgreSQL Interaction: `seed.py`
+
+The `seed.py` script interacts with the PostgreSQL database to:
+
+- Insert fake data using `Faker`.
+- Execute a series of SQL queries to manipulate and retrieve task-related information.
+
+### MongoDB Interaction: `main.py`
+
+The `main.py` script uses `PyMongo` to:
+
+- Create new cat documents in the `cats` collection.
+- Read and display all cat documents or a specific cat by name.
+- Update the age of a cat and add new features to it.
+- Delete a cat document by name or all documents in the collection.
 
 ## SQL Queries
 
-A variety of SQL queries are executed to perform operations such as:
+Various SQL queries are executed for tasks such as adding tasks, retrieving tasks by status, updating tasks, and more.
 
-- Adding a new task for a specific user.
-- Retrieving all tasks not yet completed.
-- Deleting a specific task by its id.
-- Finding users with a certain email domain.
-- Updating a user's name.
-- Getting the count of tasks for each status.
-- Retrieving tasks assigned to users with a specific email domain.
-- Selecting tasks without a description.
-- Choosing users and their tasks that are 'in progress'.
-- Obtaining users and the count of their tasks.
+## MongoDB Operations
+
+CRUD operations are implemented through functions that handle exceptions and provide clear, structured code.
